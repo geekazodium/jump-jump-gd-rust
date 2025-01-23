@@ -14,12 +14,12 @@ unsafe impl ExtensionLibrary for RustExtension {}
 
 #[derive(GodotClass)]
 #[class(base = Node2D, init)]
-struct DeltaTimeDebug{
+struct Character{
     base: Base<Node2D>
 }
 
 #[godot_api]
-impl INode2D for DeltaTimeDebug {
+impl INode2D for Character {
     fn process(&mut self, delta: f64){
         godot_print!("delta time: {}", delta);
     }
