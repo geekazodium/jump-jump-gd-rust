@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bd3amh8nlgewd"]
+
+[ext_resource type="Script" path="res://directional_light_3d.gd" id="1_vwrhf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hfh41"]
+bounce = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3yqig"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_7alox"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bjmam"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wb8tu"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0943071, -0.954229, -0.283819, 0.557017, -0.286865, 0.779384, -0.825129, -0.0845904, 0.558576, 2.30387, 1.23488, -0.121374)
+shadow_enabled = true
+script = ExtResource("1_vwrhf")
+speed = 30.0
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_hfh41")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_3yqig")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_7alox")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.53164, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_bjmam")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_wb8tu")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.53649)

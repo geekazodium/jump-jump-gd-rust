@@ -5,3 +5,5 @@ struct RustExtension;
 
 #[gdextension]
 unsafe impl ExtensionLibrary for RustExtension {}
+
+pub mod character;
