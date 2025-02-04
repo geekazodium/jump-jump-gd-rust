@@ -13,7 +13,7 @@ use godot::prelude::GodotClass;
 struct PlayerCharacterBody{
     base: Base<CharacterBody2D>,
     #[export]
-    horizontal_move_speed: f32,
+    horizontal_accel_speed: f32,
     #[export]
     gravity: f32,
     #[export]
@@ -64,19 +64,19 @@ impl ICharacterBody2D for PlayerCharacterBody {
         if Input::singleton().is_action_pressed(self.move_left_action.arg()){
             let distance_from_max_v = self.max_walk_speed - left.dot(velocity);
             if distance_from_max_v > 0.{
-                if distance_from_max_v < self.get_horizontal_move_speed() * delta_time_f32 {
+                if distance_from_max_v < self.horizontal_accel_speed * delta_time_f32 {
                     delta_v += left * (distance_from_max_v / delta_time_f32);
                 }else{
-                    delta_v += self.get_horizontal_move_speed() * left;
+                    delta_v += self.horizontal_accel_speed * left;
                 }
             }
         }else if Input::singleton().is_action_pressed(self.move_right_action.arg()){
             let distance_from_max_v = self.max_walk_speed + left.dot(velocity);
             if distance_from_max_v > 0.{
-                if distance_from_max_v < self.get_horizontal_move_speed() * delta_time_f32 {
+                if distance_from_max_v < self.horizontal_accel_speed * delta_time_f32 {
                     delta_v += -left * (distance_from_max_v / delta_time_f32);
                 }else{
-                    delta_v += -self.get_horizontal_move_speed() * left;
+                    delta_v += -self.horizontal_accel_speed * left;
                 }
             }
         }else{
